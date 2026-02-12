@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
 from uuid import uuid4
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
+from datetime import datetime as dt
 app = FastAPI(title="My FastAPI App", version="0.0.1")
 
 app.add_middleware(
@@ -49,8 +49,7 @@ async def get_all_posts():
 async def post_create(post: PostCreate):
     post_id = str(uuid4())
     new_post = post.dict()
-    create_at = str(datetime.now())
-    create_at = create_at[ : 19].replace(' ', '-')
+    create_at = dt.now().strftime('%Y-%m-%d %H:%M:%S')
     new_post["post_id"] = post_id
     new_post["create_at"] = create_at
     DATABASE[post_id] = new_post
