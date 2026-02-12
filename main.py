@@ -1,8 +1,17 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
 from uuid import uuid4
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="My FastAPI App", version="0.0.1")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 DATABASE: dict[str,dict] = {}
 
