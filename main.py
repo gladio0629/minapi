@@ -22,6 +22,7 @@ class PostCreate(BaseModel):
 
 class PostResponse(PostCreate):
     post_id:str
+    create_at:str
 
 @app.get("/")
 async def root():
