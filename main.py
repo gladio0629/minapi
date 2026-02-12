@@ -49,10 +49,10 @@ async def get_all_posts():
 async def post_create(post: PostCreate):
     post_id = str(uuid4())
     new_post = post.dict()
-    date = str(datetime.now())
-    date = date[:19].replace(' ', '-')
+    create_at = str(datetime.now())
+    create_at = create_at[ : 19].replace(' ', '-')
     new_post["post_id"] = post_id
-    new_post["created_at"] = date
+    new_post["create_at"] = create_at
     DATABASE[post_id] = new_post
     return new_post
 
